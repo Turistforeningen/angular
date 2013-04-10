@@ -21,31 +21,20 @@ angular.module('angular-rnd', ['ui.compat']).
           abstract: true,
           templateUrl: 'partials/trips/main.html',
 
-          /*resolve: {
-            trips: ['$timeout', '$stateParams', '$http', function($timeout, $stateParams, $http) {
-              $http.get('models/trips.json')
-                .then(function(res) {
-                  console.log('http', res);
-                  $timeout(function() {
-                    return res.data;
-                  }, 10);
-                  })
+          resolve: {
+            trips: ['$http', function($http) {
+              return $http({
+                method: 'GET',
+                url: 'models/trips.json'
+              });
             }]
-          },*/
+          },
 
           controller:
-            ['$scope', '$state', '$http', function($scope, $state, $http) {
+            ['$scope', '$state', '$http', 'trips', function($scope, $state, $http, trips) {
               $scope.title = 'My Trips';
               $scope.subTitle = 'Here are some of your trips';
-
-              $http.get('models/trips.json')
-                .then(function(res) {
-                  $scope.trips = res.data;
-                });
-
-              /* $scope.$on('$viewContentLoaded', function(){
-                console.log('state loaded');
-              }); */
+              $scope.trips = trips.data;
             }]
         }).
 
@@ -55,13 +44,13 @@ angular.module('angular-rnd', ['ui.compat']).
             'filter': {
               templateUrl: 'partials/trips/filter.html',
               controller: ['$scope', function($scope) {
-                console.log($scope);
+                /*console.log($scope, $scope.trips);*/
               }]
             },
             'list': {
               templateUrl: 'partials/trips/list.html',
               controller: ['$scope', function($scope) {
-                console.log($scope);
+                /*console.log($scope);*/
               }]
             }
           }
