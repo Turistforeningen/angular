@@ -1,0 +1,11 @@
+[{
+  "id": "1",
+  "name": "Min tur",
+  "foo": "asdf",
+  "bar": "qwerty"
+}, {
+  "id": "2",
+  "name": "Min andre tur",
+  "foo": "asdf",
+  "bar": "qwerty"
+}]
